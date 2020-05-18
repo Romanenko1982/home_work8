@@ -57,4 +57,18 @@ public class Product {
   public void setCost(double cost) {
     this.cost = cost;
   }
+
+  @Override
+  public String toString() {
+    final StringBuilder sb = new StringBuilder();
+    sb.append("ID=").append(ID);
+    sb.append(", name='").append(name).append('\'');
+    sb.append(", type=").append(type.getName());
+    sb.append(", date=").append(date);
+    sb.append(", cost=").append(cost);
+    return sb.toString();
+  }
+
+
+
 }

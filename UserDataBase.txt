@@ -1,1 +1,2 @@
-
+Login tima Password 123 Money 1000
+Login tima Password 123 Money 2000

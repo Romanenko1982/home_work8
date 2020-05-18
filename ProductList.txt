@@ -1,0 +1,3 @@
+ID=1, name='Samsung', type=Микроволновка, date=Sat May 16 20:48:50 MSK 2020, cost=100.0
+ID=2, name='Samsung', type=Микроволновка, date=Sat May 16 20:48:50 MSK 2020, cost=100.0
+ID=3, name='Samsung', type=Микроволновка, date=Sat May 16 20:48:50 MSK 2020, cost=100.0
