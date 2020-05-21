@@ -1,22 +1,28 @@
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
-//import java.util.Calendar.Builder;
+import model.Name;
+import model.Product;
+import model.Type;
 
 public class Main {
 
   public static void main(String[] args) {
 
-//    Console console = new Console();
-//    console.startConsole();
+    Console console = new Console();
+    console.startConsole();
+    console.createLinkedListProducts();
 
-//    GregorianCalendar gregorianCalendar = new GregorianCalendar(2015, Calendar.DECEMBER, 21);
-//    SimpleDateFormat sf = new SimpleDateFormat("dd.MM.y");
-//    System.out.println(sf.format(gregorianCalendar.getTime()));
+    CreateProductList.createProductList();
+    console.createLinkedListProducts();
 
-       Product product = new Product(1, "dkfjv", Type.FREEZER, 100,
-        new Calendar.Builder().setDate(2015, Calendar.OCTOBER, 21).build());
+    Product product = new Product(1, Name.PHILLIPS, Type.FREEZER, 100,
+        new Calendar.Builder().setDate(2020,Calendar.OCTOBER, 12).build());
     System.out.println(product);
+
+
+
+
+
+
 
 
   }

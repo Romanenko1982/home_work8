@@ -1,4 +1,4 @@
-Login tima Password 123 Money 1000
-Login tima Password 123 Money 2000
-Login tuma Password 123 Money 1000
-Login toma Password 123 Money 100
+Login Romanenko Password 123 Money 1000
+Login Kuharchik Password 123 Money 1000
+Login Denisenko Password 123 Money 1000
+

@@ -4,34 +4,39 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.Scanner;
+import model.Customer;
 
 public class Console {
 
   private Customer customer;
   private Scanner scanner;
-  private File userDataBase = new File("UserDataBase.txt");
-  private File productList = new File("ProductList.txt");
+  private File userDataBase;
+  private File productList;
+  private File productListHand;
+
+  {
+    userDataBase = new File("UserDataBase.txt");
+    productList = new File("ProductList.txt");
+    productListHand = new File("ProductListHand.txt");
+  }
 
   public Console() {
     this.scanner = new Scanner(System.in);
   }
 
   public void startConsole() {
+    checkIfCreatedFileUsers();
+    console();
+    exit();
+  }
 
-    if (!userDataBase.exists()) {
-      try {
-        userDataBase.createNewFile();
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-    }
+  private void console() {
     System.out.println("Hello user, select the procedure you need:\n");
     System.out.println("1. Registration.");
     System.out.println("2. Login/Password.");
     System.out.println("3. Exit.\n");
-
-//    scanner = new Scanner(System.in);
     if (scanner.hasNextInt()) {
       int var = scanner.nextInt();
       switch (var) {
@@ -45,24 +50,65 @@ public class Console {
           exit();
         default:
           System.out.println("Invalid menu value selected. Try again.\n");
-//          scanner.close();
           startConsole();
       }
       menu();
     } else {
       System.out.println("Invalid input. Try again.\n");
-//      scanner.close();
       startConsole();
     }
   }
 
-  public void exit() {
+  private void checkIfCreatedFileUsers() {
+    if (!userDataBase.exists()) {
+      try {
+        userDataBase.createNewFile();
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
+    LinkedList list = new LinkedList();
+  }
+
+  public void createLinkedListProducts() {
+    LinkedList<String> list = new LinkedList<>();
+    String var;
+    try(FileReader fr = new FileReader(productListHand)) {
+      BufferedReader br = new BufferedReader(fr);
+      while ((var = br.readLine()) != null ) {
+        list.add(var);
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    for (String e : list) {
+      System.out.println(e);
+    }
+  }
+
+  private void createLinkedListUsers() {
+    LinkedList<String> list = new LinkedList<String>();
+    String var;
+    try(FileReader fr = new FileReader(userDataBase)){
+      BufferedReader br = new BufferedReader(fr);
+      while ((var = br.readLine()) != null ) {
+        list.add(var);
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    for (String e:list) {
+      System.out.println(e);
+    }
+  }
+
+  private void exit() {
     scanner.close();
     System.exit(0);
   }
 
-  public void createUser() {
-//    scanner = new Scanner(System.in);
+  private void createUser() {
+    scanner = new Scanner(System.in);
     customer = new Customer();
     System.out.println("Input login:");
     String login = scanner.nextLine();
@@ -81,9 +127,9 @@ public class Console {
     }
   }
 
-  public void loginUser() {
+  private void loginUser() {
     customer = new Customer();
-//    scanner = new Scanner(System.in);
+    scanner = new Scanner(System.in);
     System.out.println("Input login:");
     String login = scanner.nextLine();
     customer.setLogin(login);
@@ -159,7 +205,7 @@ public class Console {
   }
 
   // А если тут сделать проверку user через Scanner, а не через поток?
-//  private boolean userContainsDataBaseUsers(Customer customer) {
+//  private boolean userContainsDataBaseUsers(model.Customer customer) {
 //    try (Scanner scan = new Scanner(userDataBase)) {
 //      while (scan.hasNextLine()) {
 //        String var = scan.nextLine();
@@ -173,7 +219,7 @@ public class Console {
 //    return false;
 //  }
 
-  public void menu() {
+  private void menu() {
 
     scanner = new Scanner(System.in);
     System.out.println("1. Show product list.");
@@ -238,20 +284,16 @@ public class Console {
           bw.flush();
           break;
         }
-
       }
-
     } catch (IOException e) {
       e.printStackTrace();
     }
-
   }
 
   private void createOrder() {
     System.out.println("Input ID product.");
     scanner = new Scanner(System.in);
     String product = searchProductByID(scanner.nextInt());
-
   }
 
   private String searchProductByID(int id) {
@@ -274,7 +316,6 @@ public class Console {
   }
 
   private void createPurchaseFile() {
-
   }
 
   private String parseLoginPassword(String userDataBase) {
@@ -288,4 +329,6 @@ public class Console {
   }
 
 
+  private class NotExistProductByIDException extends Throwable {
+  }
 }

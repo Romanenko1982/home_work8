@@ -1,3 +1,5 @@
+package model;
+
 public class Customer {
 
   private String login;
@@ -12,7 +14,6 @@ public class Customer {
     this.password = password;
     this.amountOfMoney = amountOfMoney;
   }
-
 
   public String getLogin() {
     return login;
