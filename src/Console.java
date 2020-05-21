@@ -13,6 +13,10 @@ public class Console {
   private File userDataBase = new File("UserDataBase.txt");
   private File productList = new File("ProductList.txt");
 
+  public Console() {
+    this.scanner = new Scanner(System.in);
+  }
+
   public void startConsole() {
 
     if (!userDataBase.exists()) {
@@ -27,7 +31,7 @@ public class Console {
     System.out.println("2. Login/Password.");
     System.out.println("3. Exit.\n");
 
-    scanner = new Scanner(System.in);
+//    scanner = new Scanner(System.in);
     if (scanner.hasNextInt()) {
       int var = scanner.nextInt();
       switch (var) {
@@ -41,21 +45,24 @@ public class Console {
           exit();
         default:
           System.out.println("Invalid menu value selected. Try again.\n");
+//          scanner.close();
           startConsole();
       }
       menu();
     } else {
       System.out.println("Invalid input. Try again.\n");
+//      scanner.close();
       startConsole();
     }
   }
 
   public void exit() {
+    scanner.close();
     System.exit(0);
   }
 
   public void createUser() {
-    scanner = new Scanner(System.in);
+//    scanner = new Scanner(System.in);
     customer = new Customer();
     System.out.println("Input login:");
     String login = scanner.nextLine();
@@ -76,7 +83,7 @@ public class Console {
 
   public void loginUser() {
     customer = new Customer();
-    scanner = new Scanner(System.in);
+//    scanner = new Scanner(System.in);
     System.out.println("Input login:");
     String login = scanner.nextLine();
     customer.setLogin(login);
@@ -137,7 +144,7 @@ public class Console {
   }
 
   private String userContainsDataBaseUsers(Customer customer) {
-    String var= "";
+    String var = "";
     try (BufferedReader br = new BufferedReader(new FileReader(userDataBase))) {
       while ((var = br.readLine()) != null) {
         String var1 = parseLoginPassword(var);
@@ -216,7 +223,7 @@ public class Console {
     System.out.println("How much to add money?");
     scanner = new Scanner(System.in);
     int money = scanner.nextInt();
-    try(BufferedReader br = new BufferedReader(new FileReader(userDataBase))){
+    try (BufferedReader br = new BufferedReader(new FileReader(userDataBase))) {
       String var;
       int dss = customer.getAmountOfMoney();
 
@@ -225,8 +232,9 @@ public class Console {
         var = parseLoginPassword(var);
         if (var.equals(customer.getLogin() + customer.getPassword())) {
           BufferedWriter bw = new BufferedWriter(new FileWriter(userDataBase, true));
-          bw.write("Login " + customer.getLogin() + " Password " + customer.getPassword() + " Money " +
-              customer.getAmountOfMoney() + "\n");
+          bw.write(
+              "Login " + customer.getLogin() + " Password " + customer.getPassword() + " Money " +
+                  customer.getAmountOfMoney() + "\n");
           bw.flush();
           break;
         }
@@ -278,8 +286,6 @@ public class Console {
     String[] array = userDataBase.split(" ");
     return Integer.valueOf(array[5]);
   }
-
-
 
 
 }
