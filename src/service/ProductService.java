@@ -1,4 +1,4 @@
-package controller;
+package service;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -22,7 +22,7 @@ public class ProductService {
     productListHand = new File("ProductListHand.txt");
   }
 
-  public Console() {
+  public ProductService() {
     this.scanner = new Scanner(System.in);
   }
 
@@ -42,7 +42,7 @@ public class ProductService {
     }
   }
 
-  private void showProductList() {
+  public void showProductList() {
     try (BufferedReader br = new BufferedReader(new FileReader(productList))) {
       String var;
       while ((var = br.readLine()) != null) {
@@ -54,13 +54,13 @@ public class ProductService {
     }
   }
 
-  private void createOrderProducts() {
+  public void createOrderProducts() {
     System.out.println("Input ID product.");
     scanner = new Scanner(System.in);
     String product = searchProductByID(scanner.nextInt());
   }
 
-  private String searchProductByID(int id) {
+  public String searchProductByID(int id) {
     String var = "";
     try (BufferedReader br = new BufferedReader(new FileReader(productList))) {
 
@@ -70,16 +70,15 @@ public class ProductService {
         if (array[0].equals("ID=" + id)) {
           return var;
         } else {
-          throw new Console.NotExistProductByIDException();
         }
       }
-    } catch (IOException | Console.NotExistProductByIDException e) {
+    } catch (IOException e) {
       e.printStackTrace();
     }
     return var;
   }
 
-  private void createPurchaseFile() {
+  public void createPurchaseFile() {
   }
 
 }

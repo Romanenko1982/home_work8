@@ -1,4 +1,4 @@
-package controller;
+package service;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -28,18 +28,19 @@ public class CustomerService {
     this.scanner = new Scanner(System.in);
   }
 
-  private void checkIfCreatedFileUsers() {
+  public void CreateFileUsers() {
     if (!userDataBase.exists()) {
       try {
         userDataBase.createNewFile();
       } catch (IOException e) {
-        e.printStackTrace();
+//        e.printStackTrace();
+        LogService.addToLog(e);
       }
     }
   }
 
-  private void createUser() {
-    scanner = new Scanner(System.in);
+  public void createUser() {
+//    scanner = new Scanner(System.in);
     customer = new Customer();
     System.out.println("Input login:");
     String login = scanner.nextLine();
@@ -54,7 +55,7 @@ public class CustomerService {
       customer.setAmountOfMoney(scanner.nextInt());
       addUserDataBaseUsers(customer);
       System.out.println("User created successfully.");
-      menu();
+//      menu();
     }
   }
 
@@ -74,12 +75,7 @@ public class CustomerService {
     }
   }
 
-  private void exit() {
-    scanner.close();
-    System.exit(0);
-  }
-
-  private void loginUser() {
+  public void loginUser() {
     customer = new Customer();
     scanner = new Scanner(System.in);
     System.out.println("Input login:");
@@ -92,7 +88,7 @@ public class CustomerService {
       if (isUserContainsDataBaseUsers(customer)) {
         customer.setAmountOfMoney(parseMoney(userContainsDataBaseUsers(customer)));
         System.out.println("Login successfully.");
-        menu();
+//        menu();
       } else {
         System.out.println("Wrong password, try again.");
         loginUser();

@@ -1,62 +1,62 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.LinkedList;
-import java.util.Scanner;
-import model.Customer;
+import service.ConsoleService;
 
 public class Console {
 
-  private Customer customer;
-  private Scanner scanner;
-  private File userDataBase;
-
-  private File productList;
-  private File productListHand;
+//  private Customer customer;
+//  private Scanner scanner;
+//  private File userDataBase;
+//  private File productList;
+//  private File productListHand;
+//  private CustomerService cs;
+//  private ProductService ps;
+//  private ConsoleService console;
 
   {
-    userDataBase = new File("UserDataBase.txt");
-    productList = new File("ProductList.txt");
-    productListHand = new File("ProductListHand.txt");
+//    userDataBase = new File("UserDataBase.txt");
+//    productList = new File("ProductList.txt");
+//    productListHand = new File("ProductListHand.txt");
   }
 
-  public Console() {
-    this.scanner = new Scanner(System.in);
-  }
+//  public Console() {
+////    this.scanner = new Scanner(System.in);
+//    cs = new CustomerService();
+//    ps = new ProductService();
+//  }
 
   public void startConsole() {
-    checkIfCreatedFileUsers();
-    console();
-    exit();
+    ConsoleService consoleService = new ConsoleService();
+
+//    co.CreateFileUsers();
+    consoleService.console();
+//    exit();
   }
 
-  private void console() {
-    System.out.println("Hello user, select the procedure you need:\n");
-    System.out.println("1. Registration.");
-    System.out.println("2. Login/Password.");
-    System.out.println("3. Exit.\n");
-    if (scanner.hasNextInt()) {
-      int var = scanner.nextInt();
-      switch (var) {
-        case 1:
-          createUser();
-          break;
-        case 2:
-          loginUser();
-          break;
-        case 3:
-          exit();
-        default:
-          System.out.println("Invalid menu value selected. Try again.\n");
-          startConsole();
-      }
-      menu();
-    } else {
-      System.out.println("Invalid input. Try again.\n");
-      startConsole();
-    }
-  }
+//  private void console() {
+//    System.out.println("Hello user, select the procedure you need:\n");
+//    System.out.println("1. Registration.");
+//    System.out.println("2. Login/Password.");
+//    System.out.println("3. Exit.\n");
+//    if (scanner.hasNextInt()) {
+//      int var = scanner.nextInt();
+//      switch (var) {
+//        case 1:
+//          cs.createUser();
+//          break;
+//        case 2:
+//          cs.loginUser();
+//          break;
+//        case 3:
+//          exit();
+//        default:
+//          System.out.println("Invalid menu value selected. Try again.\n");
+//          startConsole();
+//      }
+//      menu();
+//    } else {
+//      System.out.println("Invalid input. Try again.\n");
+//      startConsole();
+//    }
+//  }
 
 //  private void checkIfCreatedFileUsers() {
 //    if (!userDataBase.exists()) {
@@ -217,39 +217,39 @@ public class Console {
 //    return false;
 //  }
 
-  private void menu() {
-
-    scanner = new Scanner(System.in);
-    System.out.println("1. Show product list.");
-    System.out.println("2. Create order.");
-    System.out.println("3. Create my purchases file.");
-    System.out.println("4. Transfer money to a card.");
-    System.out.println("5. Exit.");
-
-    if (scanner.hasNextInt()) {
-      int var = scanner.nextInt();
-      switch (var) {
-        case 1:
-          showProductList();
-          break;
-        case 2:
-          createOrderProducts();
-          break;
-        case 3:
-          createPurchaseFile();
-          break;
-        case 4:
-          transferMoneyToCard();
-          break;
-        case 5:
-          exit();
-          break;
-        default:
-          System.out.println("Invalid menu value selected.\n");
-      }
-      menu();
-    }
-  }
+//  private void menu() {
+//
+//    scanner = new Scanner(System.in);
+//    System.out.println("1. Show product list.");
+//    System.out.println("2. Create order.");
+//    System.out.println("3. Create my purchases file.");
+//    System.out.println("4. Transfer money to a card.");
+//    System.out.println("5. Exit.");
+//
+//    if (scanner.hasNextInt()) {
+//      int var = scanner.nextInt();
+//      switch (var) {
+//        case 1:
+//          ps.showProductList();
+//          break;
+//        case 2:
+//          ps.createOrderProducts();
+//          break;
+//        case 3:
+//          ps.createPurchaseFile();
+//          break;
+//        case 4:
+////          ps.transferMoneyToCard();
+//          break;
+//        case 5:
+//          exit();
+//          break;
+//        default:
+//          System.out.println("Invalid menu value selected.\n");
+//      }
+//      menu();
+//    }
+//  }
 
 //  private void showProductList() {
 //    try (BufferedReader br = new BufferedReader(new FileReader(productList))) {
@@ -321,10 +321,10 @@ public class Console {
 //    return new StringBuffer(array[1]).append(array[3]).toString();
 //  }
 
-//  private int parseMoney(String userDataBase) {
-//    String[] array = userDataBase.split(" ");
-//    return Integer.valueOf(array[5]);
-//  }
+  private int parseMoney(String userDataBase) {
+    String[] array = userDataBase.split(" ");
+    return Integer.valueOf(array[5]);
+  }
 
 
   private class NotExistProductByIDException extends Throwable {
