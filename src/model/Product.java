@@ -39,4 +39,8 @@ public class Product {
   private String date() {
     return simpleDateFormat.format(releaseDate.getTime());
   }
+
+  public int getID() {
+    return ID;
+  }
 }

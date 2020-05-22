@@ -27,6 +27,15 @@ public class Customer {
     return password;
   }
 
+  public boolean checkLogin(String login) {
+    return this.login.equals(login);
+  }
+
+  public boolean checkPassword(String password) {
+    return this.password.equals(password);
+  }
+
+
   public void setPassword(String password) {
     this.password = password;
   }

@@ -21,10 +21,10 @@ public class ConsoleService {
     ps = new ProductService();
   }
 
-   public void console() {
+  public void console() {
     cs.CreateFileUsers();
     mainMenu();
-    exit();
+//    exit();
   }
 
   private void exit() {
@@ -32,11 +32,15 @@ public class ConsoleService {
     System.exit(0);
   }
 
-  private void mainMenu() {
+  private void printViewMainConsole() {
     System.out.println("Hello user, select the procedure you need:\n");
     System.out.println("1. Registration.");
     System.out.println("2. Login/Password.");
     System.out.println("3. Exit.\n");
+  }
+
+  public void mainMenu() {
+    printViewMainConsole();
     if (scanner.hasNextInt()) {
       int var = scanner.nextInt();
       switch (var) {
@@ -50,22 +54,28 @@ public class ConsoleService {
           exit();
         default:
           System.out.println("Invalid menu value selected. Try again.\n");
-          console();
+          mainMenu();
       }
       subMenu();
     } else {
       System.out.println("Invalid input. Try again.\n");
-      console();
+      scanner.next();
+      mainMenu();
+
     }
   }
 
-  private void subMenu() {
-    scanner = new Scanner(System.in);
+  private void printViewSubMenu() {
     System.out.println("1. Show product list.");
     System.out.println("2. Create order.");
     System.out.println("3. Create my purchases file.");
     System.out.println("4. Transfer money to a card.");
     System.out.println("5. Exit.");
+  }
+
+  public void subMenu() {
+//    scanner = new Scanner(System.in);
+    printViewSubMenu();
 
     if (scanner.hasNextInt()) {
       int var = scanner.nextInt();
@@ -80,15 +90,19 @@ public class ConsoleService {
           ps.createPurchaseFile();
           break;
         case 4:
-//          cs.transferMoneyToCard();
+//          ps.transferMoneyToCard();
           break;
         case 5:
-          exit();
+          mainMenu();
           break;
+        case 6:
+          exit();
         default:
           System.out.println("Invalid menu value selected.\n");
       }
       subMenu();
     }
   }
+
+
 }

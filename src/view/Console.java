@@ -1,3 +1,5 @@
+package view;
+
 import service.ConsoleService;
 
 public class Console {
@@ -17,7 +19,7 @@ public class Console {
 //    productListHand = new File("ProductListHand.txt");
   }
 
-//  public Console() {
+//  public view.Console() {
 ////    this.scanner = new Scanner(System.in);
 //    cs = new CustomerService();
 //    ps = new ProductService();
