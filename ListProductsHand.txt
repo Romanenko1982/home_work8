@@ -1,0 +1,10 @@
+ID - 1, name - SAMSUNG, type - REFRIGERATOR, cost - 145.0, release date - 2015.02.20
+ID - 2, name - SONY, type - WASHER, cost - 212.0, release date - 2015.09.26
+ID - 3, name - SONY, type - MICROWAVE, cost - 100.0, release date - 2015.03.12
+ID - 4, name - PHILLIPS, type - REFRIGERATOR, cost - 150.0, release date - 2015.09.14
+ID - 5, name - SONY, type - STOVE, cost - 126.0, release date - 2018.09.11
+ID - 6, name - LG, type - DISHWASHER, cost - 105.0, release date - 2016.09.24
+ID - 7, name - SONY, type - OVEN, cost - 108.0, release date - 2015.09.21
+ID - 8, name - SONY, type - MICROWAVE, cost - 820.0, release date - 2015.09.08
+ID - 9, name - SAMSUNG, type - REFRIGERATOR, cost - 150.0, release date - 2017.10.07
+ID - 10, name - LG, type - MICROWAVE, cost - 115.0, release date - 2017.09.22

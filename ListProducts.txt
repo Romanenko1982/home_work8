@@ -1,0 +1,4 @@
+ID - 1, name - LG, type - MICROWAVE, cost - 100.0, release date - 24.12.2014
+ID - 2, name - PHILLIPS, type - MICROWAVE, cost - 100.0, release date - 24.05.2014
+ID - 3, name - SONY, type - MICROWAVE, cost - 100.0, release date - 24.09.2014
+
