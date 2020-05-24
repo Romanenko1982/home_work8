@@ -1,4 +1,0 @@
-ID - 1, name - LG, type - Микроволновка, cost - 100.0, release date - 24.12.2014
-ID - 2, name - PHILLIPS, type - Микроволновка, cost - 100.0, release date - 24.05.2014
-ID - 3, name - SONY, type - Микроволновка, cost - 100.0, release date - 24.09.2014
-

@@ -15,6 +15,15 @@ public class Customer {
     this.amountOfMoney = amountOfMoney;
   }
 
+  @Override
+  public String toString() {
+    final StringBuilder sb = new StringBuilder();
+    sb.append("Login ").append(login);
+    sb.append(" Password ").append(password);
+    sb.append(" Money ").append(amountOfMoney);
+    return sb.toString();
+  }
+
   public String getLogin() {
     return login;
   }
@@ -26,15 +35,6 @@ public class Customer {
   public String getPassword() {
     return password;
   }
-
-  public boolean checkLogin(String login) {
-    return this.login.equals(login);
-  }
-
-  public boolean checkPassword(String password) {
-    return this.password.equals(password);
-  }
-
 
   public void setPassword(String password) {
     this.password = password;

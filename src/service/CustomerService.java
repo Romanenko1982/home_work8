@@ -1,8 +1,10 @@
 package service;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -11,17 +13,13 @@ import model.Customer;
 
 public class CustomerService {
 
-  private Customer customer;
-  private HashMap<String, Customer> customers;
+  private static HashMap<String, Customer> hashMapCustomers;
+  private static Customer customerObject;
   private Scanner scanner;
   private File userDataBase;
-//  private File productList;
-//  private File productListHand;
 
   {
     userDataBase = new File("UserDataBase.txt");
-//    productList = new File("ProductList.txt");
-//    productListHand = new File("ProductListHand.txt");
   }
 
   public CustomerService() {
@@ -33,38 +31,39 @@ public class CustomerService {
       try {
         userDataBase.createNewFile();
       } catch (IOException e) {
-//        e.printStackTrace();
-        LogService.addToLog(e);
+        e.printStackTrace();
+//        LogService.addToLog(e);
       }
     }
   }
 
   public HashMap<String, Customer> getCustomers() {
-    if (customers == null) {
-      customers = new HashMap<>();
+    if (hashMapCustomers == null) {
+      hashMapCustomers = new HashMap<>();
       for (String customerString : createLinkedListUsers()) {
         String[] array = customerString.split(" ");
-        customer = new Customer(array[1], array[3], Integer.parseInt(array[5]));
-        customers.put(customer.getLogin(), customer);
+        hashMapCustomers
+            .put(array[1], new Customer(array[1], array[3], Integer.parseInt(array[5])));
       }
     }
-    return customers;
+    return hashMapCustomers;
   }
 
   public void createUser() {
     scanner = new Scanner(System.in);
-    customer = new Customer();
     System.out.println("Input login:");
-    customer.setLogin(scanner.nextLine());
-    if (getCustomers().containsKey(customer.getLogin())) {
-      System.out.println("User " + customer.getLogin() + " already exists, use a different login.");
+    String login = scanner.nextLine();
+    if (getCustomers().containsKey(login)) {
+      System.out.println("User " + login + " already exists, use a different login.");
       createUser();
     } else {
+      customerObject = new Customer();
+      customerObject.setLogin(login);
       System.out.println("Input password:");
-      customer.setPassword(scanner.nextLine());
+      customerObject.setPassword(scanner.nextLine());
       System.out.println("Input amount of money in the account.");
-      customer.setAmountOfMoney(scanner.nextInt());
-      customers.put(customer.getLogin(), customer);
+      customerObject.setAmountOfMoney(scanner.nextInt());
+      hashMapCustomers.put(customerObject.getLogin(), customerObject);
       System.out.println("User created successfully.");
     }
   }
@@ -88,10 +87,10 @@ public class CustomerService {
     System.out.println("Input login:");
     String login = scanner.nextLine();
     if (getCustomers().containsKey(login)) {
-      customer = customers.get(customer.getLogin());
+      customerObject = hashMapCustomers.get(login);
       System.out.println("Input password:");
       String password = scanner.nextLine();
-      if (password.equals(customer.getPassword())) {
+      if (password.equals(customerObject.getPassword())) {
         System.out.println("Login successfully.");
       } else {
         System.out.println("Wrong password, try again.");
@@ -103,92 +102,27 @@ public class CustomerService {
     }
   }
 
-//  private void addUserDataBaseUsers(Customer customer) {
-//    try (BufferedWriter bw = new BufferedWriter(new FileWriter(userDataBase, true))) {
-//      bw.write("Login " + customer.getLogin() + " Password " + customer.getPassword() + " Money " +
-//          customer.getAmountOfMoney() + "\n");
-//    } catch (IOException e) {
-//      e.printStackTrace();
-//    }
-//  }
+  public Customer getCustomer() {
+    return customerObject;
+  }
 
-//  private boolean isUserLoginContainsDataBaseUsers(Customer customer) {
-//    try (BufferedReader br = new BufferedReader(new FileReader(userDataBase))) {
-//      String var;
-//      while ((var = br.readLine()) != null) {
-//        if (var.contains(customer.getLogin())) {
-//          return true;
-//        }
-//      }
-//    } catch (IOException e) {
-//      e.printStackTrace();
-//    }
-//    return false;
-//  }
+  public void transferMoneyToCard() {
+    System.out.println("How much to add money?");
+    scanner = new Scanner(System.in);
+    customerObject.setAmountOfMoney(customerObject.getAmountOfMoney() + scanner.nextInt());
+    rewriteCustomers();
+  }
 
-//  private boolean isUserContainsDataBaseUsers(Customer customer) {
-//    try (BufferedReader br = new BufferedReader(new FileReader(userDataBase))) {
-//      String var;
-//      while ((var = br.readLine()) != null) {
-//        var = parseLoginPassword(var);
-//        if (var.equals(customer.getLogin() + customer.getPassword())) {
-//          return true;
-//        }
-//      }
-//    } catch (IOException e) {
-//      e.printStackTrace();
-//    }
-//    return false;
-//  }
-
-//  private String userContainsDataBaseUsers(Customer customer) {
-//    String var = "";
-//    try (BufferedReader br = new BufferedReader(new FileReader(userDataBase))) {
-//      while ((var = br.readLine()) != null) {
-//        String var1 = parseLoginPassword(var);
-//        if (var1.equals(customer.getLogin() + customer.getPassword())) {
-//          break;
-//        }
-//      }
-//    } catch (IOException e) {
-//      e.printStackTrace();
-//    }
-//    return var;
-//  }
-
-//  private void transferMoneyToCard() {
-//    System.out.println("How much to add money?");
-//    scanner = new Scanner(System.in);
-//    int money = scanner.nextInt();
-//    try (BufferedReader br = new BufferedReader(new FileReader(userDataBase))) {
-//      String var;
-//      int dss = customer.getAmountOfMoney();
-//      customer.setAmountOfMoney(customer.getAmountOfMoney() + money);
-//      while ((var = br.readLine()) != null) {
-//        var = parseLoginPassword(var);
-//        if (var.equals(customer.getLogin() + customer.getPassword())) {
-//          BufferedWriter bw = new BufferedWriter(new FileWriter(userDataBase, true));
-//          bw.write(
-//              "Login " + customer.getLogin() + " Password " + customer.getPassword() + " Money " +
-//                  customer.getAmountOfMoney() + "\n");
-//          bw.flush();
-//          break;
-//        }
-//      }
-//    } catch (IOException e) {
-//      e.printStackTrace();
-//    }
-//  }
-
-//  private String parseLoginPassword(String userDataBase) {
-//    String[] array = userDataBase.split(" ");
-//    return new StringBuffer(array[1]).append(array[3]).toString();
-//  }
-
-
-//  private int parseMoney(String userDataBase) {
-//    String[] array = userDataBase.split(" ");
-//    return Integer.valueOf(array[5]);
-//  }
-
+  public void rewriteCustomers() {
+    HashMap<String, Customer> var = new CustomerService().getCustomers();
+    try (FileWriter fw = new FileWriter("UserDataBase.txt")) {
+      BufferedWriter bw = new BufferedWriter(fw);
+      for (Customer customer : var.values()) {
+        bw.write(customer.toString() + "\n");
+      }
+      bw.flush();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
 }

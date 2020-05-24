@@ -10,14 +10,14 @@ public class Product {
   private int ID;
   private Name name;
   private Type type;
-  private double cost;
+  private int cost;
   private Calendar releaseDate;
 
   {
     simpleDateFormat = new SimpleDateFormat("dd.MM.y");
   }
 
-  public Product(int ID, Name name, Type type, double cost, Calendar releaseDate) {
+  public Product(int ID, Name name, Type type, int cost, Calendar releaseDate) {
     this.ID = ID;
     this.name = name;
     this.type = type;
@@ -27,7 +27,7 @@ public class Product {
 
   @Override
   public String toString() {
-    final StringBuilder sb = new StringBuilder("model.Product ");
+    final StringBuilder sb = new StringBuilder();
     sb.append("ID - ").append(ID);
     sb.append(", name - ").append(name);
     sb.append(", type - ").append(type);
@@ -42,5 +42,9 @@ public class Product {
 
   public int getID() {
     return ID;
+  }
+
+  public int getCost() {
+    return cost;
   }
 }

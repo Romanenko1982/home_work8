@@ -1,19 +1,12 @@
 package service;
 
-import java.io.File;
 import java.util.Scanner;
-import model.Customer;
 
 public class ConsoleService {
 
-  private Customer customer;
   private Scanner scanner;
-  //  private File userDataBase;
-  private File productList;
-  private File productListHand;
   private CustomerService cs;
   private ProductService ps;
-
 
   public ConsoleService() {
     scanner = new Scanner(System.in);
@@ -24,10 +17,11 @@ public class ConsoleService {
   public void console() {
     cs.CreateFileUsers();
     mainMenu();
-//    exit();
   }
 
   private void exit() {
+    new ProductService().rewriteProducts();
+    new CustomerService().rewriteCustomers();
     scanner.close();
     System.exit(0);
   }
@@ -68,13 +62,12 @@ public class ConsoleService {
   private void printViewSubMenu() {
     System.out.println("1. Show product list.");
     System.out.println("2. Create order.");
-    System.out.println("3. Create my purchases file.");
+    System.out.println("3. Show my purchases list.");
     System.out.println("4. Transfer money to a card.");
-    System.out.println("5. Exit.");
+    System.out.println("5. Exit to Main Menu");
   }
 
   public void subMenu() {
-//    scanner = new Scanner(System.in);
     printViewSubMenu();
 
     if (scanner.hasNextInt()) {
@@ -90,19 +83,15 @@ public class ConsoleService {
           ps.createPurchaseFile();
           break;
         case 4:
-//          ps.transferMoneyToCard();
+          cs.transferMoneyToCard();
           break;
         case 5:
           mainMenu();
           break;
-        case 6:
-          exit();
         default:
           System.out.println("Invalid menu value selected.\n");
       }
       subMenu();
     }
   }
-
-
 }

@@ -1,9 +1,9 @@
 package model;
 
 public enum Type {
-  REFRIGERATOR("Холодильник"), FREEZER("Морозильник"), MICROWAVE("Микроволновка");
-//  WASHER("Стиральная машина"), DISHWASHER("Посудомоечная машина");
-//  STOVE("Плита"), OVEN("Духовой шкаф");
+  REFRIGERATOR("REFRIGERATOR"), FREEZER("FREEZER"), MICROWAVE("MICROWAVE"),
+  WASHER("WASHER"), DISHWASHER("DISHWASHER"),
+  STOVE("STOVE"), OVEN("OVEN");
 
   private String name;
 
