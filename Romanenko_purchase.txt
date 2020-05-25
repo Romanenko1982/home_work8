@@ -1,0 +1,6 @@
+ID - 1, name - SAMSUNG, type - REFRIGERATOR, cost - 145, releaseDate - 20.03.2015
+ID - 2, name - SONY, type - WASHER, cost - 212, releaseDate - 26.10.2015
+ID - 3, name - SONY, type - MICROWAVE, cost - 100, releaseDate - 12.04.2015
+ID - 10, name - LG, type - MICROWAVE, cost - 115, releaseDate - 22.10.2017
+ID - 7, name - SONY, type - OVEN, cost - 108, releaseDate - 21.10.2015
+ID - 8, name - SONY, type - MICROWAVE, cost - 820, releaseDate - 08.10.2015
