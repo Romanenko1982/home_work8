@@ -19,7 +19,7 @@ import model.Name;
 import model.Product;
 import model.Type;
 
-public class ProductService {
+public class ProductService  {
 
   private static HashMap<Integer, Product> mapProducts;
   private HashMap<Integer, Product> mapPurchaseProducts;
@@ -75,6 +75,14 @@ public class ProductService {
     Calendar date = new Calendar.Builder().setDate(Integer.parseInt(dateString[0]),
         Integer.parseInt(dateString[1]), Integer.parseInt(dateString[2])).build();
     return new Product(id, name, type, cost, date);
+  }
+
+  public void showProducts() {
+    System.out.println("PRODUCTS:");
+    for (String product : createLinkedListProducts()) {
+      System.out.println(parseProduct(product));
+    }
+    System.out.println();
   }
 
   public void showProductList() {

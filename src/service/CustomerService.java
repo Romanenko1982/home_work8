@@ -23,7 +23,7 @@ public class CustomerService {
   }
 
   public CustomerService() {
-    this.scanner = new Scanner(System.in);
+//    this.scanner = new Scanner(System.in);
   }
 
   public void CreateFileUsers() {
@@ -69,7 +69,7 @@ public class CustomerService {
   }
 
   private LinkedList<String> createLinkedListUsers() {
-    LinkedList<String> list = new LinkedList<String>();
+    LinkedList<String> list = new LinkedList<>();
     String var;
     try (FileReader fr = new FileReader(userDataBase)) {
       BufferedReader br = new BufferedReader(fr);
@@ -100,6 +100,7 @@ public class CustomerService {
       System.out.println("Try again! Wrong data!");
       loginUser();
     }
+    System.out.println();
   }
 
   public Customer getCustomer() {

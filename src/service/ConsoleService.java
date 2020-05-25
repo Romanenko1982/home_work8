@@ -27,7 +27,9 @@ public class ConsoleService {
   }
 
   private void printViewMainConsole() {
+    System.out.println("---------------Main MENU----------------");
     System.out.println("Hello user, select the procedure you need:\n");
+    System.out.println("-----------------------------------------");
     System.out.println("1. Registration.");
     System.out.println("2. Login/Password.");
     System.out.println("3. Exit.\n");
@@ -60,11 +62,13 @@ public class ConsoleService {
   }
 
   private void printViewSubMenu() {
-    System.out.println("1. Show product list.");
-    System.out.println("2. Create order.");
-    System.out.println("3. Show my purchases list.");
-    System.out.println("4. Transfer money to a card.");
-    System.out.println("5. Exit to Main Menu");
+    System.out.println("---------------------------Sub MENU-----------------------");
+    System.out.println("1. Show products.");
+    System.out.println("2. Show product list.");
+    System.out.println("3. Create order products.");
+    System.out.println("4. Show my purchases list.");
+    System.out.println("5. Transfer money to a card.");
+    System.out.println("6. Exit to Main Menu\n");
   }
 
   public void subMenu() {
@@ -74,18 +78,21 @@ public class ConsoleService {
       int var = scanner.nextInt();
       switch (var) {
         case 1:
-          ps.showProductList();
+          ps.showProducts();
           break;
         case 2:
-          ps.createOrderProducts();
+          ps.showProductList();
           break;
         case 3:
-          ps.createPurchaseFile();
+          ps.createOrderProducts();
           break;
         case 4:
-          cs.transferMoneyToCard();
+          ps.createPurchaseFile();
           break;
         case 5:
+          cs.transferMoneyToCard();
+          break;
+        case 6:
           mainMenu();
           break;
         default:
