@@ -64,11 +64,10 @@ public class ConsoleService {
   private void printViewSubMenu() {
     System.out.println("---------------------------Sub MENU-----------------------");
     System.out.println("1. Show products.");
-    System.out.println("2. Show product list.");
+    System.out.println("2. Show my purchases list.");
     System.out.println("3. Create order products.");
-    System.out.println("4. Show my purchases list.");
-    System.out.println("5. Transfer money to a card.");
-    System.out.println("6. Exit to Main Menu\n");
+    System.out.println("4. Transfer money to a card.");
+    System.out.println("5. Exit to Main Menu\n");
   }
 
   public void subMenu() {
@@ -81,18 +80,15 @@ public class ConsoleService {
           ps.showProducts();
           break;
         case 2:
-          ps.showProductList();
+          ps.showPurchaseFile();
           break;
         case 3:
           ps.createOrderProducts();
           break;
         case 4:
-          ps.createPurchaseFile();
-          break;
-        case 5:
           cs.transferMoneyToCard();
           break;
-        case 6:
+        case 5:
           mainMenu();
           break;
         default:

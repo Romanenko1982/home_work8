@@ -1,10 +1,11 @@
 package model;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 
-public class Product {
+public class Product implements Serializable {
 
   private final SimpleDateFormat simpleDateFormat;
   private int ID;

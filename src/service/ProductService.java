@@ -18,12 +18,13 @@ import model.Customer;
 import model.Name;
 import model.Product;
 import model.Type;
+import view.CustomerPurchaseList;
 
-public class ProductService  {
+public class ProductService {
 
   private static HashMap<Integer, Product> mapProducts;
   private HashMap<Integer, Product> mapPurchaseProducts;
-  private Scanner scanner;
+  transient private Scanner scanner;
 
   private File listProductsFromFile;
 
@@ -32,8 +33,19 @@ public class ProductService  {
     mapPurchaseProducts = new HashMap<>();
   }
 
+  public ProductService(HashMap<Integer, Product> mapPurchaseProducts) {
+    this.mapPurchaseProducts = mapPurchaseProducts;
+  }
+
   public ProductService() {
     this.scanner = new Scanner(System.in);
+  }
+
+  @Override
+  public String toString() {
+    final StringBuilder sb = new StringBuilder("ProductService - ");
+    sb.append("mapPurchaseProducts - ").append(mapPurchaseProducts);
+    return sb.toString();
   }
 
   public LinkedList<String> createLinkedListProducts() {
@@ -78,28 +90,11 @@ public class ProductService  {
   }
 
   public void showProducts() {
-    System.out.println("PRODUCTS:");
+    System.out.println("PRODUCTS:\n");
     for (String product : createLinkedListProducts()) {
       System.out.println(parseProduct(product));
     }
     System.out.println();
-  }
-
-  public void showProductList() {
-    String nameFile = new CustomerService().getCustomer().getLogin() + "_purchase.txt";
-    if (!(new File(nameFile).exists())) {
-      System.out.println("No purchases previously made.");
-    } else {
-      try (FileReader fr = new FileReader(nameFile)) {
-        BufferedReader br = new BufferedReader(fr);
-        String var;
-        while ((var = br.readLine()) != null) {
-          System.out.println(var);
-        }
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-    }
   }
 
   public void createOrderProducts() {
@@ -122,34 +117,35 @@ public class ProductService  {
       for (Product product : products) {
         mapPurchaseProducts.put(product.getID(), product);
       }
+      new CustomerPurchaseList(customer, mapPurchaseProducts).createSerializationPurchaseList();
       rewriteProducts();
       new CustomerService().rewriteCustomers();
-      createFileOfCustomerPurchase(mapPurchaseProducts);
+//      createFileOfCustomerPurchase(mapPurchaseProducts);
     } catch (NotEnoughMoneyInTheAccount e) {
       System.out.println("Not enough money in the account.");
     }
   }
 
-  public void createFileOfCustomerPurchase(HashMap<Integer, Product> mapPurchaseProducts) {
-    String nameFile = new CustomerService().getCustomer().getLogin() + "_purchase.txt";
-    File file = new File(nameFile);
-    if (!file.exists()) {
-      try {
-        file.createNewFile();
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-    }
-    try (FileWriter fw = new FileWriter(file, true)) {
-      BufferedWriter bw = new BufferedWriter(fw);
-      for (Product var : mapPurchaseProducts.values()) {
-        bw.write(var.toString() + "\n");
-      }
-      bw.flush();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-  }
+//  public void createFileOfCustomerPurchase(HashMap<Integer, Product> mapPurchaseProducts) {
+//    String nameFile = new CustomerService().getCustomer().getLogin() + "_purchase.txt";
+//    File file = new File(nameFile);
+//    if (!file.exists()) {
+//      try {
+//        file.createNewFile();
+//      } catch (IOException e) {
+//        e.printStackTrace();
+//      }
+//    }
+//    try (FileWriter fw = new FileWriter(file, true)) {
+//      BufferedWriter bw = new BufferedWriter(fw);
+//      for (Product var : mapPurchaseProducts.values()) {
+//        bw.write(var.toString() + "\n");
+//      }
+//      bw.flush();
+//    } catch (IOException e) {
+//      e.printStackTrace();
+//    }
+//  }
 
   public void rewriteProducts() {
     HashMap<Integer, Product> var = new ProductService().createMapProducts();
@@ -188,14 +184,35 @@ public class ProductService  {
     return list;
   }
 
-  public void createPurchaseFile() {
-    if (mapPurchaseProducts.isEmpty()) {
+//  public void showPurchaseFile() {
+//    String nameFile = new CustomerService().getCustomer().getLogin() + "_purchase.txt";
+//    if (!(new File(nameFile).exists())) {
+//      System.out.println("No purchases previously made.");
+//    } else {
+//      try (FileReader fr = new FileReader(nameFile)) {
+//        BufferedReader br = new BufferedReader(fr);
+//        String var;
+//        while ((var = br.readLine()) != null) {
+//          System.out.println(var);
+//        }
+//      } catch (IOException e) {
+//        e.printStackTrace();
+//      }
+//    }
+//  }
+
+
+  //С сериализацией
+  public void showPurchaseFile() {
+    String nameFile = new CustomerService().getCustomer().getLogin() + "_serializationlist.txt";
+    if (!(new File(nameFile).exists())) {
       System.out.println("No purchases previously made.");
     } else {
-      for (Product var : mapPurchaseProducts.values()) {
-        System.out.println(var.toString());
+      HashMap<Integer, Product> map = new CustomerPurchaseList(new CustomerService().getCustomer(),
+          mapPurchaseProducts).getDeserializationPurchaseList();
+      for (Product product : map.values()) {
+        System.out.println(product);
       }
     }
-    new ConsoleService().subMenu();
   }
 }
